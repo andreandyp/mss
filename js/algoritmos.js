@@ -1,16 +1,50 @@
 "use strict";
+var grande = 1000;
 $(document).ready(function(){
+	$("#mas").click(function(e){
+		if(grande === 100000){
+			return;
+		}
+		e.preventDefault();
+		grande *= 10;
+		$("#vgrande").text("Valor a probar: "+grande);
+	});
+
+	$("#menos").click(function(e){
+		if(grande === 1000){
+			return
+		}
+		e.preventDefault();
+		grande /= 10;
+		$("#vgrande").text("Valor a probar: "+grande);
+	});
+
+	$("#rgrande").click(function(){
+		var nums = [];
+		for(let i = 0; i < grande; i++){
+			var num = Math.trunc(Math.random()*100) - 50;
+			nums.push(num);
+		}
+
+		var resDV = divideMSS(nums, 0, nums.length - 1);
+		$("#res").text("Resultado: "+resDV);
+		alert("Terminó la forma rápida");
+		var resFB = fuerzaBrutaMSS(nums, nums.length);
+		alert("Terminó la forma lenta");
+	});
+
+
 	$("#resolver").click(function(){
 		var nums = $("#nums").val();
 		nums = nums.split(" ");
 		for(var i = 0; i < nums.length; i++){
 			nums[i] = parseInt(nums[i]);
 		}
-		var resFB = fuerzaBrutaMSS(nums, nums.length);
 		var resDV = divideMSS(nums, 0, nums.length - 1);
-
-		$("#resFB").text("Resultado: "+resFB);
-		$("#resDV").text("Resultado: "+resDV);
+		$("#res").text("Resultado: "+resDV);
+		alert("Terminó la forma rápida");
+		var resFB = fuerzaBrutaMSS(nums, nums.length);
+		alert("Terminó la forma lenta");
 	});
 });
 

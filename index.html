@@ -7,30 +7,30 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+    <script src="js/materialize.min.js"></script>
     <script src="js/algoritmos.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/styles/androidstudio.css">
+    <link rel="stylesheet" href="css/styles/idea.css">
 </head>
 <body>
     <div class="row">
         <div class="col s12 m12 center-align">
-            <h1>Subsecuencia <strong>común</strong> más larga</h1>
-            <h5>Un algoritmo <strong>común</strong> dentro de las ciencias de la computación</h5>
+            <h1>Suma máxima de un sub-arreglo</h1>
+            <h4>Introducción y análisis a este problema</h5>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m5 offset-m1">
-            <h3 class="center-align">¿Qué es el algoritmo de la subsecuencia común más larga?</h3>
-                    
-            <p>El algoritmo de la SC+L (LCS para los amigos) es un algoritmo que busca una secuencia de carácteres dentro de un conjunto de "palabras". Esta secuencia de caracteres que busca, debe de ser la más larga posible.</p>
-                        
-            <p>Por ejemplo, para las palabras "Aguacate" y "Cacahuate", la secuencia de carácteres más larga es "auate". Como ves, no deben de ser necesariamente letras consecutivas.</p>
+            <h3 class="center-align">¿Qué es la suma máxima de un sub-arreglo?</h3>
+            <p>Es un problema en el cuál queremos obtener, de una lista de números, la parte de la lista en donde la suma de los elementos de la lista es la más grande de toda la lista.</p>
+            <p>Se le llama "arreglo" debido a que así lo llama la computadora. A una lista de números se le llama arreglo. Un sub-arreglo es una parte de esa lista.</p>
         </div>
         <div class="col s12 m5">
             <h3 class="center-align">¿Cómo se obtiene ese resultado?</h3>
-                
             <p>Bueno, hay varias formas de hacerlo. Quizá ya te hayas imaginado esa forma, por eso aquí te la presentamos. Esto que verás aquí es un código que tu computadora puede entender (JavaScript) y el cual ejecutará para resolver este problema.</p>
+            <p>Da click sobre cada forma para ver su respectivo código fuente.</p>
         </div>
     </div>
     
@@ -41,16 +41,24 @@
                 <label for="cad1">Números separados por espacio</label>
             </div>
         </div>
-        <div class="col s12 m5">
-            <input class="btn waves-effect waves-light" type="button" value="Resolver" id="resolver">
+        <div class="col s12 m5 center-align">
+            <i class="btn waves-effect waves-light waves-input-wrapper">
+                <input class="btn waves-effect waves-light" type="button" value="Resolver" id="resolver">        
+            </i>
+            <h5 id="res" class="center-align">Resultado: </h5>
         </div>
     </div>
 
     <div class="row">
         <div class="col s12 m5 offset-m1">
-            <h3 class="center-align">Forma normal</h3>
-            <h5>Corto pero lento</h5>
-            <p id="resFB">Resultado: </p>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header center-align">
+                        <h3>Forma normal</h3>
+                        <h5>Corto pero lento</h5>
+                    </div>
+                    <div class="collapsible-body">
+                        <span>
 <pre><code class="hljs javascript">function fuerzaBrutaMSS(arreglo, tam){
     var cont;
     for (var i = 0; i < tam; i++){
@@ -64,102 +72,86 @@
     }
     return aux;
 }</code></pre>
+</span>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="col s12 m5">
-            <h3 class="center-align">Forma optimizada</h3>
-            <h5>Largo pero rápido</h5>
-            <p id="resDV">Resultado: </p>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header center-align">
+                        <h3>Forma optimizada</h3>
+                        <h5>Largo pero rápido</h5>
+                    </div>
+                    <div class="collapsible-body">
+                        <span>
 <pre><code class="hljs javascript">function divideMSS(arreglo, inicio, fin){
-if(inicio == fin){
-    return arreglo[inicio];
-}
-var mitad = Math.trunc((inicio+fin)/2);
-
-var prefijo = 0,
-    sufijo = 0,
-    suma, izq, der, centro;
-var izq = divideMSS(arreglo, inicio, mitad);
-var der = divideMSS(arreglo, mitad+1, fin);
-
-suma = 0;
-sufijo = arreglo[mitad];
-for (var i = mitad; i >= inicio ; i--){
-    suma += arreglo[i];
-    if(suma > sufijo){
-        sufijo = suma;
+    if(inicio == fin){
+        return arreglo[inicio];
     }
-}
-
-suma = 0;
-prefijo = arreglo[mitad+1];
-for (var i = mitad + 1; i <= fin; i++){
-    suma += arreglo[i];
-    if(suma>prefijo){
-        prefijo = suma;
+    var mitad = Math.trunc((inicio+fin)/2);
+    
+    var prefijo = 0,
+        sufijo = 0,
+        suma, izq, der, centro;
+    var izq = divideMSS(arreglo, inicio, mitad);
+    var der = divideMSS(arreglo, mitad+1, fin);
+    
+    suma = 0;
+    sufijo = arreglo[mitad];
+    for (var i = mitad; i >= inicio ; i--){
+        suma += arreglo[i];
+        if(suma > sufijo){
+            sufijo = suma;
+        }
     }
-}
-centro = sufijo + prefijo;
-return Math.max(izq,der,centro);
-}</code></pre>
+    
+    suma = 0;
+    prefijo = arreglo[mitad+1];
+    for (var i = mitad + 1; i <= fin; i++){
+        suma += arreglo[i];
+        if(suma>prefijo){
+            prefijo = suma;
+        }
+    }
+    centro = sufijo + prefijo;
+    return Math.max(izq,der,centro);
+    }</code></pre>
+                        </span>
+                    </div>
+                </li>
+            </ul>
         </div>
         
     </div>
     <div class="row">
         <div class="col s12 m5 offset-m1">
-            <h3>Entonces... ¿Cuál es la mejor forma para resolver este problema?</h3>	
-            <p>Con este algoritmo optimizado, el cuál esta construido utilizando la técnica de "programación dinámica".</p>
+            <h3>¿Por qué hay una forma normal y una optimizada?</h3>
+            <p>Imagina que el arreglo tiene muchísimos números. Ambas formas llegarán al resultado, sin embargo, la forma óptima lo hará en menos tiempo si lo comparamos con la forma normal.</p>
+            <p>¡Pruebalo tu mismo! Escoge el número de ceros y ve como la forma normal tarda menos que la forma rápida. Esta prueba no se verá de forma animada porque es demasiado trabajo para tu computadora.</p>
+
+            <p id="vgrande">Valor a probar: 1000</p>
+            <a class="btn-floating btn-large waves-effect waves-light red" id="mas"><i class="material-icons">add</i></a>
+            <a class="btn-floating btn-large waves-effect waves-light red" id="menos"><i class="material-icons">clear</i></a>
+            <a class="waves-effect waves-light btn" id="rgrande">¡Resolver!</a>
         </div>
         <div class="col s12 m5">
-            <h3>¿Por qué este último algoritmo es más rápido que el anterior?</h3>
-            <p>Bueno, esto se debe a que este algoritmo divide todo el problema (Las palabras) en problemas más chiquitos, tan chiquitos que son muy sencillos de resolver. En este caso, la palabra más chiquita es aquella que esta formada de... ¡Ninguna letra!</p>
-            <p>Quizá esto último te suene raro, pero para una computadora, una palabra formada de cero letras es totalmente válido.</p>
-            <p>Sin embargo, hay veces en las que la computadora resuelve estos "mini-problemas" 2 o más veces, lo cuál gasta tiempo inútilmente.</p>
-            <p>Para esto, existe la programación dinámica.</p>
-            <p>Cuando la computadora se encuentra con un "mini-problema" que ya resolvió antes, en vez de volverlo a resolver, obtiene a la solución que previamente guardó cuando calculó el mini-problema por primera vez.</p>
+            <h3>¿Por qué la forma optimizada es mejor que la normal?</h3>	
+            <p>Porque la forma optimizada esta diseñada usando el paradigma de "Divide y vencerás". Este paradigma dice que un problema se debe de dividir en subproblemas más pequeños hasta que la solución al problema sea trivial. Después se vuelven a unir todas las soluciones hasta que se obtenga la solución al problema original, además de que los problemas no deben de solaparse entre sí.</p>
+            <p>En otras palabras, el arreglo de números se divide en muchas partes pequeñitas hasta que cada arreglo consta de un sólo número. Después, se van sumando los elementos de cada arreglo de un elemento de tamaño y se va encontrando el arreglo más grande. Así se sigue hasta encontrar el arreglo con la suma más grande.</p>
         </div>
     </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <h2>Pues esta muy chido y todo, pero ¿Esto para que me sirve en la vida?</h2>
-
-    <p>Si te dijera que eres adoptado y tu me dices que no, ¿Cómo lo compruebas? ¿Con una prueba de ADN, no? ¡Pues ahí esta el algoritmo de la SC+L!</p>
-
-    <p>Los seres vivos tenemos ADN, el cuál esta formado por un azúcar y 4 bases nitrogenadas</p>
-    <ul>
-        <li>Adenina - A</li>
-        <li>Timina - T</li>
-        <li>Citosina - C</li>
-        <li>Guanina - G</li>
-    </ul>
-
-    <p>Y todo el ADN es una <strong>secuencia</strong> de estas bases. Es decir: ATCCGATCGCCTAGATCGATC... y así.</p>
-
-    <p>¿No me crees? Descubrelo por ti mismo:</p>
-
-    <label for="propio">Tu ADN</label>
-    <input type="text" id="propio">
-    <label for="familiar">El ADN de tu familiar</label>
-    <input type="text" id="familiar">
-
-    <pre></pre>
-
-    <p>Nota: esta es una simulación, no funciona <strong>exactamente igual</strong> en la vida real.</p>
-
-    <h2¡>Qué interesante! ¿Qué más?</h2>
-
-    <p>Eso es todo por hoy :P ahora es tu turno: ¿Qué fue lo que entendiste? ¿Entendiste el algoritmo?</p>
+    <div class="row">
+        <div class="col s12 m5 offset-m1">
+            <h2>Pues esta muy chido y todo, pero ¿Esto para que me sirve en la vida?</h2>
+            <p>(En construcción)</p>
+        </div>
+        <div class="col s12 m5">
+            <h2>¡Qué interesante! ¿Qué más?</h2>
+            <p>Eso es todo por hoy 😁 ahora es tu turno: ¿Qué fue lo que entendiste? ¿Entendiste el algoritmo?</p>
+        </div>
+    </div>
 </body>
 </html>
