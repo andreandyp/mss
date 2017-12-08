@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Subsecuencia común más larga</title>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/highlight.pack.js"></script>
+	<script>
+hljs.initHighlightingOnLoad();
+	</script>
+	<link rel="stylesheet" href="css/materialize.min.css">
+	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="stylesheet" href="css/styles/androidstudio.css">
+</head>
+<body>
+	<div class="row">
+		<div class="col s12 m12 center-align">
+			<h1>Subsecuencia <strong>común</strong> más larga</h1>
+			<h5>Un algoritmo <strong>común</strong> dentro de las ciencias de la computación</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12 m5 offset-m1">
+			<h3 class="center-align">¿Qué es el algoritmo de la subsecuencia común más larga?</h3>
+					
+			<p>El algoritmo de la SC+L (LCS para los amigos) es un algoritmo que busca una secuencia de carácteres dentro de un conjunto de "palabras". Esta secuencia de caracteres que busca, debe de ser la más larga posible.</p>
+						
+			<p>Por ejemplo, para las palabras "Aguacate" y "Cacahuate", la secuencia de carácteres más larga es "auate". Como ves, no deben de ser necesariamente letras consecutivas.</p>
+		</div>
+		<div class="col s12 m5">
+			<h3 class="center-align">¿Cómo se obtiene ese resultado?</h3>
+				
+			<p>Bueno, hay varias formas de hacerlo. Quizá ya te hayas imaginado esa forma, por eso aquí te la presentamos. Esto que verás aquí es un código que tu computadora puede entender (JavaScript) y el cual ejecutará para resolver este problema.</p>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col s12 m5 offset-m1">
+			<div class="input-field">
+				<input type="text" id="cad1" class="form-control">
+				<label for="cad1">Palabra 1</label>
+			</div>
+		</div>
+		<div class="col s12 m5">
+			<div class="input-field">
+				<input type="text" id="cad2" class="form-control">
+				<label for="cad2">Palabra 2</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12 m12 center-align">
+				<input class="btn waves-effect waves-light" type="button" value="Resolver" id="resolver">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12 m5 offset-m1">
+			<h3 class="center-align">Forma normal</h3>
+			<pre><code class="hljs javascript">
+function lcs(){
+}
+			</code></pre>
+			<p>¿Ya lo resolvió o ya te aburriste de esperar? Es normal, esta forma de resolverlo tarda muchísimo.</p>
+		</div>
+		<div class="col s12 m5">
+			<h3 class="center-align">Forma optimizada</h3>
+			<pre><code class="hljs javascript">
+function lcs(){
+}
+			</code></pre>
+			<p>¡Este lo resuelve rapidísimo!</p>
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col s12 m5 offset-m1">
+			<h3>Entonces... ¿Cuál es la mejor forma para resolver este problema?</h3>	
+			<p>Con este algoritmo optimizado, el cuál esta construido utilizando la técnica de "programación dinámica".</p>
+		</div>
+		<div class="col s12 m5">
+			<h3>¿Por qué este último algoritmo es más rápido que el anterior?</h3>
+			<p>Bueno, esto se debe a que este algoritmo divide todo el problema (Las palabras) en problemas más chiquitos, tan chiquitos que son muy sencillos de resolver. En este caso, la palabra más chiquita es aquella que esta formada de... ¡Ninguna letra!</p>
+			<p>Quizá esto último te suene raro, pero para una computadora, una palabra formada de cero letras es totalmente válido.</p>
+			<p>Sin embargo, hay veces en las que la computadora resuelve estos "mini-problemas" 2 o más veces, lo cuál gasta tiempo inútilmente.</p>
+			<p>Para esto, existe la programación dinámica.</p>
+			<p>Cuando la computadora se encuentra con un "mini-problema" que ya resolvió antes, en vez de volverlo a resolver, obtiene a la solución que previamente guardó cuando calculó el mini-problema por primera vez.</p>
+		</div>
+	</div>
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	<h2>Pues esta muy chido y todo, pero ¿Esto para que me sirve en la vida?</h2>
+
+	<p>Si te dijera que eres adoptado y tu me dices que no, ¿Cómo lo compruebas? ¿Con una prueba de ADN, no? ¡Pues ahí esta el algoritmo de la SC+L!</p>
+
+	<p>Los seres vivos tenemos ADN, el cuál esta formado por un azúcar y 4 bases nitrogenadas</p>
+	<ul>
+		<li>Adenina - A</li>
+		<li>Timina - T</li>
+		<li>Citosina - C</li>
+		<li>Guanina - G</li>
+	</ul>
+
+	<p>Y todo el ADN es una <strong>secuencia</strong> de estas bases. Es decir: ATCCGATCGCCTAGATCGATC... y así.</p>
+
+	<p>¿No me crees? Descubrelo por ti mismo:</p>
+
+	<label for="propio">Tu ADN</label>
+	<input type="text" id="propio">
+	<label for="familiar">El ADN de tu familiar</label>
+	<input type="text" id="familiar">
+
+	<pre></pre>
+
+	<p>Nota: esta es una simulación, no funciona <strong>exactamente igual</strong> en la vida real.</p>
+
+	<h2¡>Qué interesante! ¿Qué más?</h2>
+
+	<p>Eso es todo por hoy :P ahora es tu turno: ¿Qué fue lo que entendiste? ¿Entendiste el algoritmo?</p>
+</body>
+</html>

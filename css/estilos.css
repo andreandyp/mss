@@ -1,0 +1,11 @@
+body{
+    background-color: #8bc34a;
+}
+
+.input-field input:focus + label {
+    color: #76ff03 !important;
+}
+.input-field input:focus {
+    border-bottom: 1px solid #76ff03 !important;
+    box-shadow: 0 1px 0 0 #76ff03 !important;
+}
