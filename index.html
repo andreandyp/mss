@@ -37,7 +37,8 @@
     <div class="row">
         <div class="col s12 m5 offset-m1">
             <div class="input-field">
-                <input type="text" id="nums" class="form-control">
+                <!--Prueba: -2 -5 6 -2 -3 1 5 -6-->
+                <input type="text" id="nums" class="form-control" value="">
                 <label for="cad1">Números separados por espacio</label>
             </div>
         </div>
@@ -76,6 +77,7 @@
                     </div>
                 </li>
             </ul>
+            <div id="normal" class="animado center-align"></div>
         </div>
         <div class="col s12 m5">
             <ul class="collapsible" data-collapsible="accordion">
@@ -122,6 +124,7 @@
                     </div>
                 </li>
             </ul>
+            <div id="optimizada" class="animado center-align"></div>
         </div>
         
     </div>
@@ -132,9 +135,11 @@
             <p>¡Pruebalo tu mismo! Escoge el número de ceros y ve como la forma normal tarda menos que la forma rápida. Esta prueba no se verá de forma animada porque es demasiado trabajo para tu computadora.</p>
 
             <p id="vgrande">Valor a probar: 1000</p>
-            <a class="btn-floating btn-large waves-effect waves-light red" id="mas"><i class="material-icons">add</i></a>
-            <a class="btn-floating btn-large waves-effect waves-light red" id="menos"><i class="material-icons">clear</i></a>
+            <a class="waves-effect waves-light btn green" id="mas"><i class="material-icons">add</i></a>
+            <a class="waves-effect waves-light btn red" id="menos"><i class="material-icons">clear</i></a>
             <a class="waves-effect waves-light btn" id="rgrande">¡Resolver!</a>
+            <h5 id="resDV">Resultado (optimizada): </h5>
+            <h5 id="resFB">Resultado (normal): </h5>
         </div>
         <div class="col s12 m5">
             <h3>¿Por qué la forma optimizada es mejor que la normal?</h3>	
@@ -145,8 +150,10 @@
 
     <div class="row">
         <div class="col s12 m5 offset-m1">
-            <h2>Pues esta muy chido y todo, pero ¿Esto para que me sirve en la vida?</h2>
-            <p>(En construcción)</p>
+            <h2>¿Y esto para que me sirve en la vida?</h2>
+            <p>En el análisis de imágenes, cuando se trata de encontrar el área más brillante de una imagen, se ocupa este algoritmo. La imagen debe de ser un mapa de bits (archivos con extensión .bmp). La imagen se transforma en una matriz en la que cada valor equivale al brillo de cada pixel.</p>
+
+            <p>Ese es el uso más fácil de entender. Sin embargo no es el único, también en el análisis de las subsecuencias genómicas y en la minería de datos de utiliza este algoritmo. En el ejemplo que ves en esta página se utilizan valores positivos y negativos, en los usos de la vida real que ya te mostramos se utiliza otro rango de valores.</p>
         </div>
         <div class="col s12 m5">
             <h2>¡Qué interesante! ¿Qué más?</h2>

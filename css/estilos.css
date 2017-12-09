@@ -5,3 +5,19 @@
     border-bottom: 1px solid #1b5e20 !important;
     box-shadow: 0 1px 0 0 #1b5e20 !important;
 }
+
+.espacio{
+	display: inline-block;
+	border: 2px solid #000;
+	margin: 4px;
+	font-size: 14pt;
+	padding: 4px;
+}
+
+.resultado{
+	color: red;
+}
+
+.actual{
+	background-color: red;
+}
