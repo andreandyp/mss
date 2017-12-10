@@ -91,31 +91,32 @@
     }
     var mitad = Math.trunc((inicio+fin)/2);
     
-    var prefijo = 0,
-        sufijo = 0,
-        suma, centro;
+    var sumaIzquierda = 0,
+        sumaDerecha = 0,
+        sumaCentral = 0,
+        suma;
     var izq = divideMSS(arreglo, inicio, mitad);
     var der = divideMSS(arreglo, mitad+1, fin);
     
     suma = 0;
-    sufijo = arreglo[mitad];
+    sumaIzquierda = arreglo[mitad];
     for (let i = mitad; i >= inicio ; i--){
         suma += arreglo[i];
-        if(suma > sufijo){
-            sufijo = suma;
+        if(suma > sumaIzquierda){
+            sumaIzquierda = suma;
         }
     }
     
     suma = 0;
-    prefijo = arreglo[mitad+1];
+    sumaDerecha = arreglo[mitad+1];
     for (let i = mitad + 1; i <= fin; i++){
         suma += arreglo[i];
-        if(suma>prefijo){
-            prefijo = suma;
+        if(suma>sumaDerecha){
+            sumaDerecha = suma;
         }
     }
-    centro = sufijo + prefijo;
-    return Math.max(izq,der,centro);
+    sumaCentral = sumaIzquierda + sumaDerecha;
+    return Math.max(izq,der,sumaCentral);
 }</span></div>
                 </li>
             </ul>
@@ -132,7 +133,8 @@
             <p>Imagina que el arreglo tiene muchísimos números. Ambas formas llegarán al resultado, sin embargo, la forma óptima lo hará en menos tiempo si lo comparamos con la forma normal.</p>
             <p>¡Pruebalo tu mismo! Escoge el número de ceros y ve como la forma normal tarda menos que la forma rápida. Esta prueba no se verá de forma animada porque es demasiado trabajo para tu computadora.</p>
 
-            <p id="vgrande">Valor a probar: 1000</p>
+            <p id="vgrande">Cantidad de números (generados aleatoriamente) a probar: 1000</p>
+            <p><em><strong>Cuidado: el tiempo varia de dispositivo a dispositivo. El mínimo es 1K y el máximo 1M.</strong></em></p>
             <a class="waves-effect waves-light btn green" id="mas"><i class="material-icons">add</i></a>
             <a class="waves-effect waves-light btn red" id="menos"><i class="material-icons">clear</i></a>
             <a class="waves-effect waves-light btn" id="rgrande">¡Resolver!</a>

@@ -9,21 +9,23 @@ $(document).ready(function(){
 	editNormal.setTheme("ace/theme/iplastic");
 	editNormal.getSession().setMode("ace/mode/javascript");
 	editNormal.setOptions(aceOpciones);
+	editNormal.renderer.$cursorLayer.element.style.display = "none"
 
 	var editOptima = ace.edit("editOptima");
 	editOptima.setTheme("ace/theme/iplastic");
 	editOptima.getSession().setMode("ace/mode/javascript");
 	editNormal.setOptions(aceOpciones);
+	editNormal.renderer.$cursorLayer.element.style.display = "none"
 
 	var grande = 1000;
 
 	$("#mas").click(function(e){
-		if(grande === 100000){
+		if(grande === 1000000){
 			return;
 		}
 		e.preventDefault();
 		grande *= 10;
-		$("#vgrande").text("Valor a probar: "+grande);
+		$("#vgrande").text("Cantidad de números (generados aleatoriamente) a probar: "+grande);
 	});
 
 	$("#menos").click(function(e){
@@ -32,7 +34,7 @@ $(document).ready(function(){
 		}
 		e.preventDefault();
 		grande /= 10;
-		$("#vgrande").text("Valor a probar: "+grande);
+		$("#vgrande").text("Cantidad de números (generados aleatoriamente) a probar: "+grande);
 	});
 
 	$("#rgrande").click(function(){
@@ -68,7 +70,7 @@ $(document).ready(function(){
 		$("#res").text("Resultado: "+resDV);
 
 		crearAnimFB(nums);
-		var resFB = fuerzaBrutaMSS(nums, nums.length, true);
+		var resFB = fuerzaBrutaMSS(nums, nums.length, true, editNormal);
 	});
 });
 
@@ -115,11 +117,11 @@ function crearAnimDV(numeros){
 	}
 }
 
-async function fuerzaBrutaMSS(arreglo, tam, animar){
+async function fuerzaBrutaMSS(arreglo, tam, animar, editNormal){
 	var aux = arreglo[0];
 	var cont;
-	animar && editNormal.gotoLine(2, 0, true);
 
+	animar && editNormal.gotoLine(2, 0, true);
 	animar && $("#fb"+tam).removeClass("resultado");
 	animar && $("#fb0").addClass("actual");
 	animar && $("#fb"+tam).text("Resultado: "+aux);
@@ -128,26 +130,33 @@ async function fuerzaBrutaMSS(arreglo, tam, animar){
 	for (var i = 0; i < tam; i++){
 		animar && $("#fb"+(tam - 1)).removeClass("actual");
 		cont = 0;
+		animar && editNormal.gotoLine(4, 0, true);
+		animar && await esperar(1000);
 		animar && $("#parcialfb").text("Resultado actual: "+cont);
 		for (var j = i; j < tam; j++){
 			animar && $("#fb"+(j-1)).removeClass("actual");
 			animar && $("#fb"+j).addClass("actual");
 			animar && $("#parcialfb").text("Resultado actual: "+cont+" + "+arreglo[j]);
 			cont = cont + arreglo[j];
+			animar && editNormal.gotoLine(6, 0, true);
 			animar && await esperar(1000);
 			animar && $("#parcialfb").text("Resultado actual: "+cont);
 			animar && await esperar(1000);
 			if (cont > aux){
 				aux = cont;
+				animar && editNormal.gotoLine(8, 0, true);
 				animar && $("#fb"+tam).addClass("resultado");
 				animar && $("#fb"+tam).text("Resultado: "+aux);
 				animar && await esperar(1000);
 				animar && $("#fb"+tam).removeClass("resultado");
 			}
+			animar && editNormal.gotoLine(9, 0, true);
+			animar && await esperar(1000);
 		}
 	}
 	animar && $("#fb"+(tam - 1)).removeClass("actual");
 	animar && $("#fb"+tam).addClass("resultado");
+	animar && editNormal.gotoLine(12, 0, true);
 	return aux;
 }
 
@@ -157,29 +166,30 @@ function divideMSS(arreglo, inicio, fin){
 	}
 	var mitad = Math.trunc((inicio+fin)/2);
   
-	var prefijo = 0,
-		sufijo = 0,
-		suma, centro;
+	var sumaIzquierda = 0,
+		sumaDerecha = 0,
+		sumaCentral = 0,
+		suma;
 	var izq = divideMSS(arreglo, inicio, mitad);
 	var der = divideMSS(arreglo, mitad+1, fin);
   
 	suma = 0;
-	sufijo = arreglo[mitad];
+	sumaIzquierda = arreglo[mitad];
 	for (let i = mitad; i >= inicio ; i--){
 		suma += arreglo[i];
-		if(suma > sufijo){
-			sufijo = suma;
+		if(suma > sumaIzquierda){
+			sumaIzquierda = suma;
 		}
 	}
 
 	suma = 0;
-	prefijo = arreglo[mitad + 1];
+	sumaDerecha = arreglo[mitad + 1];
 	for (let i = mitad + 1; i <= fin; i++){
 		suma += arreglo[i];
-		if(suma > prefijo){
-			prefijo = suma;
+		if(suma > sumaDerecha){
+			sumaDerecha = suma;
 		}
 	}
-	centro = sufijo + prefijo;
-	return Math.max(izq, der, centro);
+	sumaCentral = sumaIzquierda + sumaDerecha;
+	return Math.max(izq, der, sumaCentral);
 }
