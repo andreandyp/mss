@@ -1,6 +1,20 @@
 "use strict";
 
 $(document).ready(function(){
+	var aceOpciones = {
+		maxLines: Infinity
+	};
+
+	var editNormal = ace.edit("editNormal");
+	editNormal.setTheme("ace/theme/iplastic");
+	editNormal.getSession().setMode("ace/mode/javascript");
+	editNormal.setOptions(aceOpciones);
+
+	var editOptima = ace.edit("editOptima");
+	editOptima.setTheme("ace/theme/iplastic");
+	editOptima.getSession().setMode("ace/mode/javascript");
+	editNormal.setOptions(aceOpciones);
+
 	var grande = 1000;
 
 	$("#mas").click(function(e){
@@ -104,6 +118,7 @@ function crearAnimDV(numeros){
 async function fuerzaBrutaMSS(arreglo, tam, animar){
 	var aux = arreglo[0];
 	var cont;
+	animar && editNormal.gotoLine(2, 0, true);
 
 	animar && $("#fb"+tam).removeClass("resultado");
 	animar && $("#fb0").addClass("actual");
@@ -144,13 +159,13 @@ function divideMSS(arreglo, inicio, fin){
   
 	var prefijo = 0,
 		sufijo = 0,
-		suma, izq, der, centro;
+		suma, centro;
 	var izq = divideMSS(arreglo, inicio, mitad);
 	var der = divideMSS(arreglo, mitad+1, fin);
   
 	suma = 0;
 	sufijo = arreglo[mitad];
-	for (var i = mitad; i >= inicio ; i--){
+	for (let i = mitad; i >= inicio ; i--){
 		suma += arreglo[i];
 		if(suma > sufijo){
 			sufijo = suma;
@@ -159,7 +174,7 @@ function divideMSS(arreglo, inicio, fin){
 
 	suma = 0;
 	prefijo = arreglo[mitad + 1];
-	for (var i = mitad + 1; i <= fin; i++){
+	for (let i = mitad + 1; i <= fin; i++){
 		suma += arreglo[i];
 		if(suma > prefijo){
 			prefijo = suma;

@@ -21,3 +21,11 @@
 .actual{
 	background-color: red;
 }
+
+#editNormal{
+	height: 224px; /* = 16px * 13+1 lineas */
+}
+
+#editOptima{
+	height: 528px; /* = 16px * 32+1 lineas */
+}

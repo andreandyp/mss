@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Subsecuencia común más larga</title>
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
     <script src="js/materialize.min.js"></script>
+    <script src="js/src-min/ace.js"></script>
     <script src="js/algoritmos.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/styles/idea.css">
 </head>
 <body>
     <div class="row">
@@ -54,13 +52,11 @@
         <div class="col s12 m5 offset-m1">
             <ul class="collapsible" data-collapsible="accordion">
                 <li>
-                    <div class="collapsible-header center-align">
+                    <div class="collapsible-header center-align active">
                         <h3>Forma normal</h3>
                         <h5>Corto pero lento</h5>
                     </div>
-                    <div class="collapsible-body">
-                        <span>
-<pre><code class="hljs javascript">function fuerzaBrutaMSS(arreglo, tam){
+                    <div class="collapsible-body" id="editNormal"><span>function fuerzaBrutaMSS(arreglo, tam){
     var cont;
     for (var i = 0; i < tam; i++){
         cont = 0;
@@ -72,23 +68,24 @@
         }
     }
     return aux;
-}</code></pre>
-</span>
-                    </div>
+}</span></div>
                 </li>
             </ul>
-            <div id="normal" class="animado center-align"></div>
         </div>
-        <div class="col s12 m5">
+        <div class="col s12 m5 center-align">
+            <h3>Versión animada</h3>
+            <div id="normal" class="animado"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m5 offset-m1">
             <ul class="collapsible" data-collapsible="accordion">
                 <li>
-                    <div class="collapsible-header center-align">
+                    <div class="collapsible-header center-align active">
                         <h3>Forma optimizada</h3>
                         <h5>Largo pero rápido</h5>
                     </div>
-                    <div class="collapsible-body">
-                        <span>
-<pre><code class="hljs javascript">function divideMSS(arreglo, inicio, fin){
+                    <div class="collapsible-body" id="editOptima"><span>function divideMSS(arreglo, inicio, fin){
     if(inicio == fin){
         return arreglo[inicio];
     }
@@ -96,13 +93,13 @@
     
     var prefijo = 0,
         sufijo = 0,
-        suma, izq, der, centro;
+        suma, centro;
     var izq = divideMSS(arreglo, inicio, mitad);
     var der = divideMSS(arreglo, mitad+1, fin);
     
     suma = 0;
     sufijo = arreglo[mitad];
-    for (var i = mitad; i >= inicio ; i--){
+    for (let i = mitad; i >= inicio ; i--){
         suma += arreglo[i];
         if(suma > sufijo){
             sufijo = suma;
@@ -111,7 +108,7 @@
     
     suma = 0;
     prefijo = arreglo[mitad+1];
-    for (var i = mitad + 1; i <= fin; i++){
+    for (let i = mitad + 1; i <= fin; i++){
         suma += arreglo[i];
         if(suma>prefijo){
             prefijo = suma;
@@ -119,14 +116,15 @@
     }
     centro = sufijo + prefijo;
     return Math.max(izq,der,centro);
-    }</code></pre>
-                        </span>
-                    </div>
+}</span></div>
                 </li>
             </ul>
-            <div id="optimizada" class="animado center-align"></div>
+            
         </div>
-        
+        <div class="col s12 m5 center-align">
+            <h3>Versión animada</h3>
+            <div id="optimizada" class="animado"></div>
+        </div>
     </div>
     <div class="row">
         <div class="col s12 m5 offset-m1">
