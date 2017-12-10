@@ -28,7 +28,7 @@
         <div class="col s12 m5">
             <h3 class="center-align">¿Cómo se obtiene ese resultado?</h3>
             <p>Bueno, hay varias formas de hacerlo. Quizá ya te hayas imaginado esa forma, por eso aquí te la presentamos. Esto que verás aquí es un código que tu computadora puede entender (JavaScript) y el cual ejecutará para resolver este problema.</p>
-            <p>Da click sobre cada forma para ver su respectivo código fuente.</p>
+            <p>Da click sobre cada forma para ver su respectivo código fuente o ingresa valores y da click sobre la forma que quieres usar para resolver el problema.</p>
         </div>
     </div>
     
@@ -42,7 +42,10 @@
         </div>
         <div class="col s12 m5 center-align">
             <i class="btn waves-effect waves-light waves-input-wrapper">
-                <input class="btn waves-effect waves-light" type="button" value="Resolver" id="resolver">        
+                <input class="btn waves-effect waves-light" type="button" value="Resolver por la forma normal" id="resolverN">
+            </i>
+            <i class="btn waves-effect waves-light waves-input-wrapper">
+                <input class="btn waves-effect waves-light" type="button" value="Resolver por la forma óptima" id="resolverO">
             </i>
             <h5 id="res" class="center-align">Resultado: </h5>
         </div>
@@ -50,13 +53,14 @@
 
     <div class="row">
         <div class="col s12 m5 offset-m1">
-            <ul class="collapsible" data-collapsible="accordion">
+            <ul class="collapsible" data-collapsible="accordion" id="collapsibleNormal">
                 <li>
-                    <div class="collapsible-header center-align active">
+                    <div class="collapsible-header center-align">
                         <h3>Forma normal</h3>
                         <h5>Corto pero lento</h5>
                     </div>
                     <div class="collapsible-body" id="editNormal"><span>function fuerzaBrutaMSS(arreglo, tam){
+    var aux = arreglo[0];
     var cont;
     for (var i = 0; i < tam; i++){
         cont = 0;
@@ -79,10 +83,10 @@
     </div>
     <div class="row">
         <div class="col s12 m5 offset-m1">
-            <ul class="collapsible" data-collapsible="accordion">
+            <ul class="collapsible" data-collapsible="accordion" id="collapsibleOptima">
                 <li>
-                    <div class="collapsible-header center-align active">
-                        <h3>Forma optimizada</h3>
+                    <div class="collapsible-header center-align">
+                        <h3>Forma óptima</h3>
                         <h5>Largo pero rápido</h5>
                     </div>
                     <div class="collapsible-body" id="editOptima"><span>function divideMSS(arreglo, inicio, fin){
