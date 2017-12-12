@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * Raul Trinidad Ortiz
+ * André Michel Pozos Nieto
+ * Arturo Rodriguez Cervantes
+ * Análisis de algoritmos - 3CM3
+ * 
+ * Este sitio web le explica a cualquier persona qué es y cómo funciona el algoritmo de la suma máxima de un sub-arreglo
+ */
+
 //El nivel indica la fila en la que se deben de poner los números en la animación de DyV
 var nivel = 0;
 
@@ -53,6 +62,9 @@ $(document).ready(function(){
 
 	//Resolver el problema para números grandes
 	$("#rgrande").click(function(){
+		$("#resFB").text("Resultado (normal): ");
+		$("#resDV").text("Resultado (optimizada): ");
+
 		var nums = [];
 		//Generar números aleatorios enteros entre -100 y 100
 		for(let i = 0; i < grande; i++){
@@ -61,16 +73,33 @@ $(document).ready(function(){
 		}
 
 		//Ejecutar ambos algoritmos al mismo tiempo con hilos
-		//(Aun no implementado)
-		divideMSS(nums, 0, nums.length - 1, false).then(function(resDV){
-			$("#resDV").text("Resultado (optimizada): "+resDV);
+		
+		//Asignar variables de entorno al hilo
+		var hilo = thread({
+			env: {
+				arreglo: nums,
+				tam: nums.length
+			}
 		});
-		alert("Terminó la forma óptima");
 
-		fuerzaBrutaMSS(nums, nums.length, false).then(function(resFB){
-			$("#resFB").text("Resultado (normal): "+resFB);
-		});
-		alert("Terminó la forma normal");
+		//Ejecutar hilo y actualizar resultado cuando acabe de ejecutarse
+		var task = hilo.run(function(){
+			var aux = env.arreglo[0];
+			var cont;
+			for (var i = 0; i < env.tam; i++){
+				cont = 0;
+				for (var j = i; j < env.tam; j++){
+					cont = cont + parseInt(env.arreglo[j]);
+					if (cont > aux){
+						aux = cont;
+					}
+				}
+			}
+			return aux;
+		}).then(resFB => $("#resFB").text("Resultado (normal): "+resFB) );
+
+		divideMSS(nums, 0, nums.length - 1, false).then(resDV => $("#resDV").text("Resultado (optimizada): "+resDV));
+		
 	});
 
 	//Resolver el problema para los números introducidos
